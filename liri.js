@@ -5,11 +5,29 @@ var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 var axios = require('axios');
 var moment = require('moment');
+var fs = require('fs');
 
 //Determines which command was used (choices are 'concert-this', 'spotify-this-song', 'movie-this', and 'do-what-it-says')
 var command = process.argv[2];
 
-if (command === 'concert-this') {
+switch (command) {
+    case 'concert-this':
+        concert();
+        break;
+    case 'spotify-this-song':
+        spotifySong();
+        break;
+    case 'movie-this':
+        movieInfo();
+        break;
+    case 'do-what-it-says':
+        fileCommand();
+        break;
+    default:
+        console.log("This command was not recognized.");
+}
+
+function concert() {
     //Gets the band or artist name from args
     var artist = process.argv.splice(3).join('+');
     //Queries Bands in Town API
@@ -24,10 +42,10 @@ if (command === 'concert-this') {
             console.log(newDate);
             console.log('------------------------------');
         }
-    })
+    });
 }
 
-else if (command === 'spotify-this-song') {
+function spotifySong() {
     var song;
     //Gets the song name from args; if no song is entered, assigns default song to "The Sign" by Ace of Base
     if (process.argv[3]) {
@@ -71,7 +89,7 @@ else if (command === 'spotify-this-song') {
     });
 }
 
-else if (command === 'movie-this') {
+function movieInfo() {
     var movieName;
     //Gets the movie name from args; if no movie is entered, assigns default movie to "Mr. Nobody"
     if (process.argv[3]) {
@@ -82,34 +100,28 @@ else if (command === 'movie-this') {
     }
     //Call to the OMDB API
     axios.get("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy").then(function(response) {
-    //Display Results
-    console.log("------------------------------");
-    var title = response.data.Title;
-    console.log("Title: " + title);
-    var year = response.data.Year;
-    console.log("Release Year: " + year);
-    var imdbRating = response.data.Ratings[0].Value;
-    console.log("IMDB Rating: " + imdbRating);
-    var rottenTomatoes = response.data.Ratings[1].Value;
-    console.log("Rotten Tomatoes Rating: " + rottenTomatoes);
-    var country = response.data.Country;
-    console.log("The Produced In: " + country);
-    var language = response.data.Language;
-    console.log("Language: " + language);
-    var plot = response.data.Plot;
-    console.log("Plot: " + plot);
-    var actors = response.data.Actors;
-    console.log("Actors: " + actors);
-    console.log("------------------------------");
-  }
-);
-
+        //Display Results
+        console.log("------------------------------");
+        var title = response.data.Title;
+        console.log("Title: " + title);
+        var year = response.data.Year;
+        console.log("Release Year: " + year);
+        var imdbRating = response.data.Ratings[0].Value;
+        console.log("IMDB Rating: " + imdbRating);
+        var rottenTomatoes = response.data.Ratings[1].Value;
+        console.log("Rotten Tomatoes Rating: " + rottenTomatoes);
+        var country = response.data.Country;
+        console.log("The Produced In: " + country);
+        var language = response.data.Language;
+        console.log("Language: " + language);
+        var plot = response.data.Plot;
+        console.log("Plot: " + plot);
+        var actors = response.data.Actors;
+        console.log("Actors: " + actors);
+        console.log("------------------------------");
+    });
 }
 
-else if (command === 'do-what-it-says') {
-    console.log("You are almost done, Sarah!  Don't forget your idea to refactor to switch statements");
-}
-
-else {
-    console.log("This command was not recognized.");
+function fileCommand() {
+    console.log("You will read from the file for this one");
 }
