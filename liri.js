@@ -72,7 +72,38 @@ else if (command === 'spotify-this-song') {
 }
 
 else if (command === 'movie-this') {
-    console.log("On to the movies!");
+    var movieName;
+    //Gets the movie name from args; if no movie is entered, assigns default movie to "Mr. Nobody"
+    if (process.argv[3]) {
+        movieName = process.argv.splice(3).join('+');
+    }
+    else {
+        movieName = "mr+nobody";
+    }
+    //Call to the OMDB API
+    axios.get("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy").then(function(response) {
+    //Display Results
+    console.log("------------------------------");
+    var title = response.data.Title;
+    console.log("Title: " + title);
+    var year = response.data.Year;
+    console.log("Release Year: " + year);
+    var imdbRating = response.data.Ratings[0].Value;
+    console.log("IMDB Rating: " + imdbRating);
+    var rottenTomatoes = response.data.Ratings[1].Value;
+    console.log("Rotten Tomatoes Rating: " + rottenTomatoes);
+    var country = response.data.Country;
+    console.log("The Produced In: " + country);
+    var language = response.data.Language;
+    console.log("Language: " + language);
+    var plot = response.data.Plot;
+    console.log("Plot: " + plot);
+    var actors = response.data.Actors;
+    console.log("Actors: " + actors);
+    console.log("------------------------------");
+  }
+);
+
 }
 
 else if (command === 'do-what-it-says') {
