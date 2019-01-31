@@ -25,7 +25,6 @@ function runProgram() {
         if (command === 'do-what-it-says') {
             getResult(command);
             addToLog(args);
-            finalPrompt();
         } else {
             inquirer.prompt([
                 {
@@ -37,12 +36,30 @@ function runProgram() {
                 args = search.username.replace(' ', '+');
                 getResult(command, args);
                 addToLog(args);
-                finalPrompt();
             });
         }
     });
 };
 runProgram();
+
+function getResult(command, args) {
+    switch (command) {
+        case 'concert-this':
+            concert(args);
+            break;
+        case 'spotify-this-song':
+            spotifySong(args);
+            break;
+        case 'movie-this':
+            movieInfo(args);
+            break;
+        case 'do-what-it-says':
+            fileCommand(args);
+            break;
+        default:
+            console.log("This command was not recognized.");
+    }
+}
 
 //Prompts the use to either choose to search again or exit
 function finalPrompt() {
@@ -62,25 +79,6 @@ function finalPrompt() {
             console.log("That was fun!  Let's do it again soon.");
         }
     });
-}
-
-function getResult(command, args) {
-    switch (command) {
-        case 'concert-this':
-            concert(args);
-            break;
-        case 'spotify-this-song':
-            spotifySong(args);
-            break;
-        case 'movie-this':
-            movieInfo(args);
-            break;
-        case 'do-what-it-says':
-            fileCommand(args);
-            break;
-        default:
-            console.log("This command was not recognized.");
-    }
 }
 
 function concert(args) {
@@ -105,6 +103,7 @@ function concert(args) {
             text = args + ', ' + venue + ', ' + city + ', ' + newDate + ', ';
             addToLog(text);
         }
+        finalPrompt();
     });
 }
 
@@ -150,6 +149,7 @@ function spotifySong(args) {
             text = args + ', ' + artists + ', ' + songName + ', ' + preview + ', ' + albumName + ', ';
             addToLog(text);
         }
+        finalPrompt();
     }).catch(function(err){
         console.log(err);
     });
@@ -189,6 +189,7 @@ function movieInfo(args) {
         console.log("------------------------------");
         text = args + ', ' + title + ', ' + year + ', ' + imdbRating + ', ' + rottenTomatoes + ', ' + country + ', ' + language + ', ' + plot + ', ' + actors + ', ';
         addToLog(text);
+        finalPrompt();
     });
 }
 
@@ -222,6 +223,7 @@ function fileCommand(args) {
             default:
                 console.log("This command was not recognized.");
         }
+        finalPrompt();
       });
 }
 
