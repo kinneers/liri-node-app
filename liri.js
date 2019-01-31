@@ -223,7 +223,6 @@ function fileCommand(args) {
             default:
                 console.log("This command was not recognized.");
         }
-        finalPrompt();
       });
 }
 
