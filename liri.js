@@ -6,28 +6,79 @@ var spotify = new Spotify(keys.spotify);
 var axios = require('axios');
 var moment = require('moment');
 var fs = require('fs');
+var inquirer = require('inquirer');
+var command;
+var args;
 
 //Determines which command was used (choices are 'concert-this', 'spotify-this-song', 'movie-this', and 'do-what-it-says')
-var command = process.argv[2];
-var args;
-var text = command + ', ';
-addToLog(text);
+function runProgram() {
+    inquirer.prompt([
+        {
+            type: "list",
+            message: "Welcome!  What would you like to do today?",
+            choices: ["concert-this", "spotify-this-song", "movie-this", "do-what-it-says"],
+            name: "command"
+        }
+    ]).then(function(res) {
+        command = res.command;
+        addToLog(command);
+        if (command === 'do-what-it-says') {
+            getResult(command);
+            addToLog(args);
+        } else {
+            inquirer.prompt([
+                {
+                type: "input",
+                message: "What would you like to search for?",
+                name: "username"
+                }
+            ]).then(function(search) {
+                args = search.username.replace(' ', '+');
+                getResult(command, args);
+                addToLog(args);
+            });
+        }
+    });
+};
+runProgram();
 
-switch (command) {
-    case 'concert-this':
-        concert(args);
-        break;
-    case 'spotify-this-song':
-        spotifySong(args);
-        break;
-    case 'movie-this':
-        movieInfo(args);
-        break;
-    case 'do-what-it-says':
-        fileCommand(args);
-        break;
-    default:
-        console.log("This command was not recognized.");
+function getResult(command, args) {
+    switch (command) {
+        case 'concert-this':
+            concert(args);
+            break;
+        case 'spotify-this-song':
+            spotifySong(args);
+            break;
+        case 'movie-this':
+            movieInfo(args);
+            break;
+        case 'do-what-it-says':
+            fileCommand(args);
+            break;
+        default:
+            console.log("This command was not recognized.");
+    }
+}
+
+//Prompts the use to either choose to search again or exit
+function finalPrompt() {
+    inquirer.prompt([
+        {
+        type: "list",
+        message: "Would you like to search again or exit?",
+        choices: ["Search", "Exit"],
+        name: "again"
+        }
+    ]).then(function(res) {
+        var answer = res.again;
+        if (answer === 'Search') {
+            runProgram();
+        }
+        else {
+            console.log("That was fun!  Let's do it again soon.");
+        }
+    });
 }
 
 function concert(args) {
@@ -52,6 +103,7 @@ function concert(args) {
             text = args + ', ' + venue + ', ' + city + ', ' + newDate + ', ';
             addToLog(text);
         }
+        finalPrompt();
     });
 }
 
@@ -97,6 +149,7 @@ function spotifySong(args) {
             text = args + ', ' + artists + ', ' + songName + ', ' + preview + ', ' + albumName + ', ';
             addToLog(text);
         }
+        finalPrompt();
     }).catch(function(err){
         console.log(err);
     });
@@ -136,6 +189,7 @@ function movieInfo(args) {
         console.log("------------------------------");
         text = args + ', ' + title + ', ' + year + ', ' + imdbRating + ', ' + rottenTomatoes + ', ' + country + ', ' + language + ', ' + plot + ', ' + actors + ', ';
         addToLog(text);
+        finalPrompt();
     });
 }
 
@@ -169,6 +223,7 @@ function fileCommand(args) {
             default:
                 console.log("This command was not recognized.");
         }
+        finalPrompt();
       });
 }
 
@@ -178,10 +233,6 @@ function addToLog(text) {
         // If an error was experienced we will log it.
         if (err) {
           console.log(err);
-        }
-        // If no error is experienced, we'll log the phrase "Content Added" to our node console.
-        else {
-          console.log("Content Added!");
         }
       });
 }
