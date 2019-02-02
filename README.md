@@ -17,7 +17,7 @@ To use this app, you must register for an API key from Spotify and create a .env
 
 \# Spotify API keys
 
-SPOTIFY_ID=Your Spotify ID Goes Here
+SPOTIFY_ID=Your Spotify ID Goes Here (U+000A)
 SPOTIFY_SECRET=Your Secret Key Goes Here
 
 If they are not already installed, you will need to install dotenv, node-spotify-api, axios, moment, fs, and inquirer using the npm install command in order for the app to work properly.
