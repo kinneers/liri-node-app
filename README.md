@@ -12,7 +12,7 @@ JavaScript, jQuery, Node.js, Moment.js, Inquirer, Dotenv, Axios, Spotify API, Ba
 ## View Demonstration:
 - [Link to Demonstration Video][https://drive.google.com/file/d/1yyI6QguHF7zbFQ6hJFeYO6L13Y7FeBCl/view?usp=sharing]
 
-## Download:
+## You may clone this repository to download the app:
 To use this app, you must register for an API key from Spotify and create a .env file containing the following:
 
 ##### \# Spotify API keys
