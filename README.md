@@ -15,7 +15,7 @@ JavaScript, jQuery, Node.js, Moment.js, Inquirer, Dotenv, Axios, Spotify API, Ba
 ### Search for a Movie or from Commands in a File:
 ![Demonstration GIF](./liri-movie-file.gif)
 
-### Log Searches and Results
+### Log Searches and Results:
 ![Demonstration GIF](./liri-log-file.gif)
 
 ## View Full Demonstration Video:
