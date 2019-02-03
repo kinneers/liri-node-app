@@ -226,9 +226,10 @@ function fileCommand(args) {
       });
 }
 
+var divider = "\n------------------------------------------------------------\n\n";
 //Function to append content to log.txt
 function addToLog(text) {
-    fs.appendFile("log.txt", text, function(err) {
+    fs.appendFile("log.txt", text + divider, function(err) {
         // If an error was experienced we will log it.
         if (err) {
           console.log(err);

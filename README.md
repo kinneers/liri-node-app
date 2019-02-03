@@ -1,4 +1,4 @@
-# liri-node-app
+# LIRI Node Application
 This command line node app uses inquirer to take in parameters and return requested data from the Spotify, Bands in Town, and OMDB APIs.  Liri also has the capability to read a command from a text file and log commands and resutls.
 
 ### Developed by: Sarah Kinneer
@@ -7,10 +7,19 @@ This command line node app uses inquirer to take in parameters and return reques
 ## Technologies Used:
 JavaScript, jQuery, Node.js, Moment.js, Inquirer, Dotenv, Axios, Spotify API, Bands in Town API, OMDB API
 
-![Photo of Liri in Use in the Terminal](terminal-photo.png)
+## Features:
+
+### Search for Upcoming Concerts or Songs:
+![Demonstration GIF](./liri-concert-song.gif)
+
+### Search for a Movie or from Commands in a File:
+![Demonstration GIF](./liri-movie-file.gif)
+
+### Log Searches and Results
+![Demonstration GIF](./liri-log-file.gif)
 
 ## View Full Demonstration Video:
-- [Demonstration GIF](./liri-demo.gif)
+- [Link to Demonstration Video](https://drive.google.com/file/d/1yyI6QguHF7zbFQ6hJFeYO6L13Y7FeBCl/view?usp=sharing)
 
 ## You may clone this repository to download the app:
 To use this app, you must register for an API key from Spotify and create a .env file containing the following:
