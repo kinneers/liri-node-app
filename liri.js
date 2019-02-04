@@ -82,6 +82,7 @@ function finalPrompt() {
 }
 
 function concert(args) {
+    args = "New Kids on the Block";
     //Checks whether or not a value for args has been previously set (by do-what-it-says), if not sets args
     if (!args) {
         //Gets the band or artist name from args

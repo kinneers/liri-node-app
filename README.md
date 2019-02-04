@@ -5,7 +5,7 @@ This command line node app uses inquirer to take in parameters and return reques
 #### January, 2019
 
 ## Technologies Used:
-JavaScript, jQuery, Node.js, Moment.js, Inquirer, Dotenv, Axios, Spotify API, Bands in Town API, OMDB API
+JavaScript, Node.js, Moment.js, Inquirer, Dotenv, Axios, Spotify API, Bands in Town API, OMDB API
 
 ## Features:
 
