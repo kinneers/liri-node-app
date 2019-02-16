@@ -82,11 +82,16 @@ function finalPrompt() {
 }
 
 function concert(args) {
-    args = "New Kids on the Block";
     //Checks whether or not a value for args has been previously set (by do-what-it-says), if not sets args
     if (!args) {
-        //Gets the band or artist name from args
-        args = process.argv.splice(3).join('+');
+        //Gets the band/artist name from args; if no band/artist is entered, assigns default to New Kids on the Block
+        if (process.argv[3]) {
+            args = process.argv.splice(3).join('+');
+        }
+        else {
+            // Sets default if no args entered
+            args = "New Kids on the Block";
+        }
     }
     //Queries Bands in Town API
     var query = "https://rest.bandsintown.com/artists/" + args + "/events?app_id=codingbootcamp"
