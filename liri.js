@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // Read and set environment variables
 require('dotenv').config();
 var keys = require('./keys.js');
@@ -39,7 +40,7 @@ function runProgram() {
             });
         }
     });
-};
+}
 runProgram();
 
 function getResult(command, args) {
@@ -106,7 +107,7 @@ function concert(args) {
             var newDate = moment(date).format('MM/DD/YYYY');
             console.log(newDate);
             console.log('------------------------------');
-            text = args + ', ' + venue + ', ' + city + ', ' + newDate + ', ';
+            var text = args + ', ' + venue + ', ' + city + ', ' + newDate + ', ';
             addToLog(text);
         }
         finalPrompt();
@@ -152,7 +153,7 @@ function spotifySong(args) {
             var albumName = response.tracks.items[i].album.name;
             console.log("Album: " + albumName);
             console.log("-----------------------------");
-            text = args + ', ' + artists + ', ' + songName + ', ' + preview + ', ' + albumName + ', ';
+            var text = args + ', ' + artists + ', ' + songName + ', ' + preview + ', ' + albumName + ', ';
             addToLog(text);
         }
         finalPrompt();
@@ -193,7 +194,7 @@ function movieInfo(args) {
         var actors = response.data.Actors;
         console.log("Actors: " + actors);
         console.log("------------------------------");
-        text = args + ', ' + title + ', ' + year + ', ' + imdbRating + ', ' + rottenTomatoes + ', ' + country + ', ' + language + ', ' + plot + ', ' + actors + ', ';
+        var text = args + ', ' + title + ', ' + year + ', ' + imdbRating + ', ' + rottenTomatoes + ', ' + country + ', ' + language + ', ' + plot + ', ' + actors + ', ';
         addToLog(text);
         finalPrompt();
     });
@@ -210,7 +211,7 @@ function fileCommand(args) {
         // Re-display the content as an array
         console.log(dataArr);
         command = dataArr[0];
-        tempArgs = dataArr[1];
+        var tempArgs = dataArr[1];
         tempArgs = tempArgs.split(' ').join('+');
         args = tempArgs.replace(/"/g,"");
         console.log(tempArgs);
@@ -229,7 +230,7 @@ function fileCommand(args) {
             default:
                 console.log("This command was not recognized.");
         }
-      });
+    });
 }
 
 var divider = "\n------------------------------------------------------------\n\n";
