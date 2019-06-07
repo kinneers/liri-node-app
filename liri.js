@@ -95,7 +95,7 @@ function concert(args) {
         }
     }
     //Queries Bands in Town API
-    var query = "https://rest.bandsintown.com/artists/" + args + "/events?app_id=codingbootcamp"
+    var query = "https://rest.bandsintown.com/artists/" + args + "/events?app_id=codingbootcamp";
     //Prints list of each event's venue, location, and date to the console
     axios.get(query).then(function(res){
         for (var i = 0; i < res.data.length; i++) {
